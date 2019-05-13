@@ -5,12 +5,14 @@ import thunkMiddleware from "redux-thunk";
 import {loadFromLocalStorage, saveToLocalStorage} from "./localStorage";
 
 import usersReducer from "./reducers/usersReducer";
+import chatReducer from "./reducers/chatReducer";
 
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
     router: connectRouter(history),
-    users: usersReducer
+    users: usersReducer,
+    chat: chatReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

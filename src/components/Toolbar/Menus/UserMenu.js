@@ -1,6 +1,5 @@
 import React from 'react';
 import {DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown} from "reactstrap";
-import {NavLink as RouterNavLink} from 'react-router-dom';
 
 const UserMenu = ({user, logout}) => (
     <UncontrolledDropdown nav inNavbar>
@@ -8,9 +7,6 @@ const UserMenu = ({user, logout}) => (
             Hello, {user.displayname}
         </DropdownToggle>
         <DropdownMenu right>
-            <DropdownItem tag={RouterNavLink} to={'/products/new'}>
-                Add New Product
-            </DropdownItem>
             <DropdownItem onClick={logout}>
                 Logout
             </DropdownItem>

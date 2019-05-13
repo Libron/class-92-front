@@ -14,7 +14,7 @@ class MessageForm extends Component {
 
     submitHandler = event => {
         event.preventDefault();
-        console.log(this.state);
+
         this.props.submit(JSON.stringify({
                 type: 'CREATE_MESSAGE',
                 text: this.state.text

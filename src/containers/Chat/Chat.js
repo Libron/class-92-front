@@ -22,6 +22,12 @@ class Chat extends Component {
                 <Toolbar user={this.props.user} logout={this.props.logoutUser}/>
                 <Container>
                     <Row>
+                        <Col>
+                            <MessageForm submit={this.props.sendMessage}/>
+                        </Col>
+                    </Row>
+
+                    <Row>
                         <Col sm="9">
                             <h2>Messages</h2>
                             <ListGroup>
@@ -39,11 +45,7 @@ class Chat extends Component {
                         </Col>
                     </Row>
 
-                    <Row>
-                        <Col>
-                            <MessageForm submit={this.props.sendMessage}/>
-                        </Col>
-                    </Row>
+
 
                 </Container>
             </Fragment>

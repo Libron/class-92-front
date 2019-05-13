@@ -14,6 +14,8 @@ const chatReducer = (state = initialState, action) => {
             return {...state, messages: action.messages, loading: false};
         case FETCH_MESSAGES_FAILURE:
             return {...state, error: action.error, loading: false};
+        case "NEW_MESSAGE":
+            return {...state, messages: [...state.messages, action.messages]};
 
         default:
             return state;

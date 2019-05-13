@@ -11,6 +11,8 @@ const fetchMessagesRequest = () => ({type: FETCH_MESSAGES_REQUEST});
 const fetchMessagesSuccess = messages => ({type: FETCH_MESSAGES_SUCCESS, messages});
 const fetchMessagesFailure = error => ({type: FETCH_MESSAGES_FAILURE, error});
 
+const receiveMessageRequest = decodedMessage => ({type: decodedMessage.type, messages: decodedMessage.text});
+
 export const fetchMessages = () => {
     return dispatch => {
         dispatch(fetchMessagesRequest());
@@ -47,6 +49,7 @@ export const connectWebsocket = token => {
                     return;
                 case 'NEW_MESSAGE':
                     console.log('NEW_MESSAGE');
+                    dispatch(receiveMessageRequest(decodedMessage));
                     return;
                 default:
                     return;
@@ -57,6 +60,7 @@ export const connectWebsocket = token => {
 
 export const sendMessage = text => {
     return dispatch => {
+        console.log('SEND MESSAGE HANDLER', text);
         WS.send(text);
     };
 };

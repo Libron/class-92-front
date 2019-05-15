@@ -7,7 +7,7 @@ const ActiveUsers = ({activeUsers}) => {
     }
     return (
         <Fragment>
-            <h2 className="Title">Users <Badge color="warning">{activeUsers.length} </Badge></h2>
+            <h2 className="Title">Users online <Badge color="warning">{activeUsers.length} </Badge></h2>
             <ul>
                 {activeUsers.map((user, idx)=> (
                     <li className="User" key={idx}>{user}</li>

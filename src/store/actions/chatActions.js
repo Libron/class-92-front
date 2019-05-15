@@ -23,7 +23,7 @@ export const fetchMessages = limit => {
         }
         return axios.get('/messages' + query).then(
             response => {
-                dispatch(fetchMessagesSuccess(response.data));
+                dispatch(fetchMessagesSuccess(response.data.reverse()));
             },
             error => {
                 if (error.response) {

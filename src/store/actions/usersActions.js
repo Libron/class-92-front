@@ -19,12 +19,15 @@ const loginUserFailure = error => ({type: LOGIN_USER_FAILURE, error});
 export const logoutUser = () => {
     return (dispatch, getState) => {
         const token = getState().users.user.token;
+        const ws = getState().chat.websocket;
         const config = {headers: {'Authorization': token}};
 
         return axios.delete('/users/session', config).then(
             () => {
                 NotificationManager.success('Logged out successfully');
-                dispatch({type: LOGOUT_USER})
+                dispatch({type: LOGOUT_USER});
+                dispatch(push('/login'));
+                ws.close();
             },
             error => {
                 NotificationManager.error('Error');

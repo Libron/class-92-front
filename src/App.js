@@ -5,11 +5,13 @@ import {connect} from "react-redux";
 import {Route, Switch, withRouter} from "react-router";
 import Login from "./containers/Auth/Login/Login";
 import Register from "./containers/Auth/Register/Register";
+import {NotificationContainer} from "react-notifications";
 
 class App extends Component {
     render() {
         return (
             <div className="App">
+                <NotificationContainer/>
                 <Switch>
                     <Route path="/" exact component={Chat} />
                     <Route path="/chat" exact component={Chat} />

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Badge, Col, Container, ListGroup, ListGroupItem, Row} from "reactstrap";
 import Toolbar from "../../components/Toolbar/Toolbar";
 import {connect} from "react-redux";
-import {connectWebsocket, fetchMessages, sendMessage} from "../../store/actions/chatActions";
+import {connectWebsocket, sendMessage} from "../../store/actions/chatActions";
 import {logoutUser} from "../../store/actions/usersActions";
 import MessageForm from "../../components/MessageForm/MessageForm";
 import ActiveUsers from "../../components/ActiveUsers/ActiveUsers";
@@ -35,7 +35,7 @@ class Chat extends Component {
                                 {this.props.messages.map(msg => (
                                     <ListGroupItem key={msg._id} className="Message">
                                         <AvatarThumbnail image={msg.user.image} />
-                                        <p><b>{msg.user.displayname}</b> <Badge color="info">{msg.datetime}</Badge></p>
+                                        <p><b>{msg.user.displayname}</b> <Badge color="info">{new Date(msg.datetime).toLocaleString()}</Badge></p>
                                         <p>{msg.text}</p>
                                     </ListGroupItem>
                                 ))}
@@ -63,7 +63,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    fetchMessages: limit => dispatch(fetchMessages(limit)),
     logoutUser: () => dispatch(logoutUser()),
     connectWebsocket: token => dispatch(connectWebsocket(token)),
     sendMessage: msg => dispatch(sendMessage(msg))

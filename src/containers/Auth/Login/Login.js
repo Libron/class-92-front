@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import {Alert, Button,  Form, FormGroup} from "reactstrap";
 import FormElement from "../../../components/UI/Form/FormElement";
 import {loginUser} from "../../../store/actions/usersActions";
-import connect from "react-redux/es/connect/connect";
+import {NavLink} from "reactstrap";
+import {NavLink as RouterNavLink} from "react-router-dom";
+import {connect} from "react-redux";
 
 class Login extends Component {
     state = {
@@ -25,6 +27,7 @@ class Login extends Component {
         return (
             <div className="Auth Login">
                 <h2 style={{textAlign: 'center', marginBottom: '20px'}}>Login to chat</h2>
+                <p><i>If you don't have an account, please <NavLink style={{display: 'inline-block', padding: 0, margin: 0}} tag={RouterNavLink} to="/register" exact>register</NavLink></i></p>
                 {this.props.error && (
                     <Alert color="danger">{this.props.error.error}</Alert>
                 )}

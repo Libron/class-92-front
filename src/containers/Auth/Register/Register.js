@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
-import {Alert, Button, Form, FormGroup} from "reactstrap";
+import {Alert, Button, Form, FormGroup, NavLink} from "reactstrap";
 import {registerUser} from "../../../store/actions/usersActions";
 import {connect} from "react-redux";
 import FormElement from "../../../components/UI/Form/FormElement";
+import {NavLink as RouterNavLink} from "react-router-dom";
 
 class Register extends Component {
     state = {
         username: '',
         password: '',
-        displayname: '',
-        phone: ''
+        displayname: ''
     };
 
     inputChangeHandler = event => {
@@ -31,6 +31,7 @@ class Register extends Component {
         return (
             <div className="Auth Register">
                 <h2 style={{textAlign: 'center', marginBottom: '20px'}}>Register to chat</h2>
+                <p><i>Already have an account ? <NavLink style={{display: 'inline-block', padding: 0, margin: 0}} tag={RouterNavLink} to="/login" exact>Sign in now</NavLink></i></p>
                 {this.props.error && this.props.error.global && (
                     <Alert color="danger">
                         {this.props.error.global}
@@ -68,17 +69,6 @@ class Register extends Component {
                         error={this.getFieldError('password')}
                         placeholder="Enter new secure password"
                         autoComplete="new-password"
-                    />
-
-                    <FormElement
-                        propertyName="phone"
-                        title="Phone number"
-                        type="text"
-                        value={this.state.phone}
-                        onChange={this.inputChangeHandler}
-                        error={this.getFieldError('phone')}
-                        placeholder="+996 779 24 88 88"
-                        autoComplete="new-phone"
                     />
 
                     <FormGroup row>

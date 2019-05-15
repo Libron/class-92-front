@@ -27,7 +27,9 @@ const usersReducer = (state = initialState, action) => {
           return {...state, user: null};
 
       case "NEW_USER":
-          return {...state, activeUsers: action.userData.activeUsers, displayname: action.userData.displayName};
+          return {...state, activeUsers: action.userData.activeUsers, displayname: action.userData.displayname};
+      case "USER_LEFT":
+          return {...state, activeUsers: action.data.activeUsers, displayname: action.data.displayname}
       default:
           return state;
   }

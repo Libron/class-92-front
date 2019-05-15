@@ -1,6 +1,7 @@
 import axios from "../../axios-api";
 import {wsURL} from "../../constants";
 import {push} from 'connected-react-router';
+import {NotificationManager} from "react-notifications";
 
 export const FETCH_MESSAGES_REQUEST = 'FETCH_MESSAGES_REQUEST';
 export const FETCH_MESSAGES_SUCCESS = 'FETCH_MESSAGES_SUCCESS';
@@ -60,11 +61,20 @@ export const connectWebsocket = token => {
                         activeUsers: decodedMessage.activeUsers,
                         user: decodedMessage.displayname
                     };
+                    NotificationManager.success(`User ${decodedMessage.displayname} joined chat`);
                     return dispatch({type: decodedMessage.type, userData});
 
                 case 'NEW_MESSAGE':
                     dispatch({type: decodedMessage.type, message: decodedMessage.message});
                     return;
+
+                case 'USER_LEFT':
+                    const data = {
+                        activeUsers: decodedMessage.activeUsers,
+                        user: decodedMessage.displayname
+                    };
+                    NotificationManager.error(`${decodedMessage.displayname} left chat`);
+                    return dispatch({type: decodedMessage.type, data});
                 default:
                     return;
             }

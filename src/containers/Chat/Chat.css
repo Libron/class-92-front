@@ -39,3 +39,17 @@
     color: white;
     font-style: italic;
 }
+
+.ActiveList {
+    list-style: none;
+}
+
+.ActiveList li::before {
+    content: "\2022";
+    color: greenyellow;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    font-size: 20px;
+    margin-left: -1em;
+}

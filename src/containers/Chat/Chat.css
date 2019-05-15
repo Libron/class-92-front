@@ -1,0 +1,41 @@
+.Chat {
+    position: relative;
+    margin-bottom: 120px;
+}
+
+.Chat .MessageForm {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    background: #26a69a;
+    padding: 5px 50px;
+    margin: 0;
+    color: #fff;
+}
+
+.Chat .Title {
+    color: white;
+    margin-bottom: 30px;
+}
+
+.Chat .Message {
+    position: relative;
+    margin-left: 75px;
+    margin-bottom: 5px;
+    border-radius: 0 0 0 50px;
+}
+
+.Chat .avatar-thumbnail {
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: -70px;
+}
+
+.Chat .User {
+    color: white;
+    font-style: italic;
+}

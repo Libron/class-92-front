@@ -1,15 +1,21 @@
 import React, {Component} from 'react';
 import './App.css';
-import Auth from "./containers/Auth/Auth";
 import Chat from "./containers/Chat/Chat";
 import {connect} from "react-redux";
-import {withRouter} from "react-router";
+import {Route, Switch, withRouter} from "react-router";
+import Login from "./containers/Auth/Login/Login";
+import Register from "./containers/Auth/Register/Register";
 
 class App extends Component {
     render() {
         return (
             <div className="App">
-                {this.props.user ? <Chat/> : <Auth/>}
+                <Switch>
+                    <Route path="/" exact component={Chat} />
+                    <Route path="/chat" exact component={Chat} />
+                    <Route path="/login" exact component={Login} />
+                    <Route path="/register" exact component={Register} />
+                </Switch>
             </div>
         );
     }

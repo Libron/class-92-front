@@ -8,7 +8,9 @@ import {
 const initialState = {
     registerError: null,
     user: null,
-    loginError: null
+    loginError: null,
+    activeUsers: [],
+    displayname: ''
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -23,10 +25,12 @@ const usersReducer = (state = initialState, action) => {
           return {...state, loginError: action.error};
       case LOGOUT_USER:
           return {...state, user: null};
+
+      case "NEW_USER":
+          return {...state, activeUsers: action.userData.activeUsers, displayname: action.userData.displayName};
       default:
           return state;
   }
 };
 
 export default usersReducer;
-

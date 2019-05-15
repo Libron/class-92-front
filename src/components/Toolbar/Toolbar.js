@@ -10,9 +10,9 @@ import UserMenu from "./Menus/UserMenu";
 
 const Toolbar = ({user, logout}) => {
   return (
-    <Navbar color="dark" dark expand="md" style={{marginBottom: '25px'}}>
+    <Navbar color="dark" dark expand="md" style={{marginBottom: '50px'}}>
         <Container>
-            <NavbarBrand tag={RouterNavLink} to="/">Chat</NavbarBrand>
+            <NavbarBrand tag={RouterNavLink} to="/">Chat Box</NavbarBrand>
             <Nav className="ml-auto" navbar>
                 <UserMenu user={user} logout={logout} />
             </Nav>

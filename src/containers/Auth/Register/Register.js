@@ -29,7 +29,8 @@ class Register extends Component {
 
     render() {
         return (
-            <div className="Register">
+            <div className="Auth Register">
+                <h2 style={{textAlign: 'center', marginBottom: '20px'}}>Register to chat</h2>
                 {this.props.error && this.props.error.global && (
                     <Alert color="danger">
                         {this.props.error.global}

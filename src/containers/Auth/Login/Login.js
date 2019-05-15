@@ -23,7 +23,8 @@ class Login extends Component {
 
     render() {
         return (
-            <div className="Login">
+            <div className="Auth Login">
+                <h2 style={{textAlign: 'center', marginBottom: '20px'}}>Login to chat</h2>
                 {this.props.error && (
                     <Alert color="danger">{this.props.error.error}</Alert>
                 )}

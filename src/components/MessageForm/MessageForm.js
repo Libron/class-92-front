@@ -23,15 +23,14 @@ class MessageForm extends Component {
 
     render() {
         return (
-            <Form onSubmit={this.submitHandler}>
+            <Form onSubmit={this.submitHandler} className="MessageForm">
                 <FormGroup row>
-                    <Label for="text" sm={2}>Email</Label>
+                    <Label for="text" sm={2}>{this.props.displayname} write: </Label>
                     <Col sm={8}>
                         <Input type="text" name="text" id="text" placeholder="Type here ..." value={this.state.text} onChange={this.inputChangeHandler} />
                     </Col>
-                    <Button sm={2}>SEND</Button>
+                    <Button sm={2} color="warning">SEND</Button>
                 </FormGroup>
-
             </Form>
         );
     }

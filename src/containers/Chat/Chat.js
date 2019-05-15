@@ -1,39 +1,41 @@
-import React, {Component, Fragment} from 'react';
-import {Col, Container, ListGroup, ListGroupItem, Row} from "reactstrap";
+import React, {Component} from 'react';
+import {Badge, Col, Container, ListGroup, ListGroupItem, Row} from "reactstrap";
 import Toolbar from "../../components/Toolbar/Toolbar";
 import {connect} from "react-redux";
 import {connectWebsocket, fetchMessages, sendMessage} from "../../store/actions/chatActions";
 import {logoutUser} from "../../store/actions/usersActions";
 import MessageForm from "../../components/MessageForm/MessageForm";
+import ActiveUsers from "../../components/ActiveUsers/ActiveUsers";
+
+import './Chat.css';
+import AvatarThumbnail from "../../components/UI/AvatarThumbnail/AvatarThumbnail";
 
 class Chat extends Component {
     componentDidMount() {
-        this.props.fetchMessages();
+        if (!this.props.user) {
+            return this.props.history.push('/login');
+        }
+
         this.props.connectWebsocket(this.props.user.token);
     };
 
     render() {
-        if (!this.props.messages) {
-            return <div>Loading...</div>
+        if (!this.props.messages || !this.props.user) {
+            return <div>Loading..</div>
         }
 
         return (
-            <Fragment>
+            <div className="Chat">
                 <Toolbar user={this.props.user} logout={this.props.logoutUser}/>
                 <Container>
                     <Row>
-                        <Col>
-                            <MessageForm submit={this.props.sendMessage}/>
-                        </Col>
-                    </Row>
-
-                    <Row>
                         <Col sm="9">
-                            <h2>Messages</h2>
+                            <h2 className="Title">Messages <Badge color="warning">{this.props.messages.length}</Badge></h2>
                             <ListGroup>
                                 {this.props.messages.map(msg => (
-                                    <ListGroupItem key={msg._id}>
-                                        <p>{msg.user.displayname} - {msg.datetime}</p>
+                                    <ListGroupItem key={msg._id} className="Message">
+                                        <AvatarThumbnail image={msg.user.image} />
+                                        <p><b>{msg.user.displayname}</b> <Badge color="info">{msg.datetime}</Badge></p>
                                         <p>{msg.text}</p>
                                     </ListGroupItem>
                                 ))}
@@ -41,29 +43,30 @@ class Chat extends Component {
                         </Col>
 
                         <Col sm="3">
-                            <h2>Users</h2>
+                            <ActiveUsers activeUsers={this.props.activeUsers}/>
                         </Col>
                     </Row>
-
-
-
                 </Container>
-            </Fragment>
+                <Row>
+                    <MessageForm displayname={this.props.user.displayname} submit={this.props.sendMessage} />
+                </Row>
+            </div>
         );
     }
 }
 
 const mapStateToProps = state => ({
     user: state.users.user,
+    activeUsers: state.users.activeUsers,
     messages: state.chat.messages,
     loading: state.chat.loading
 });
 
 const mapDispatchToProps = dispatch => ({
-    fetchMessages: () => dispatch(fetchMessages()),
+    fetchMessages: limit => dispatch(fetchMessages(limit)),
     logoutUser: () => dispatch(logoutUser()),
     connectWebsocket: token => dispatch(connectWebsocket(token)),
-    sendMessage: (msg) => dispatch(sendMessage(msg))
+    sendMessage: msg => dispatch(sendMessage(msg))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Chat);
